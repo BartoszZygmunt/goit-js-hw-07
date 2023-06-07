@@ -16,9 +16,11 @@ const galleryItemsMarkup = galleryItems.map((item) => {
 //dodaję do DOM
 galleryElement.innerHTML = galleryItemsMarkup.join("");
 
+//zdarzenie - kliknięcie w IMG
 galleryElement.addEventListener("click", (event) => {
   event.preventDefault();
   const target = event.target;
+
   if (target.tagName === "IMG") {
     const instance = basicLightbox.create(`
       <img id="modal-image" src="" alt="Modal Image" />
@@ -26,7 +28,18 @@ galleryElement.addEventListener("click", (event) => {
     const originalImageSrc = target.parentNode.getAttribute("href");
     const modalImage = instance.element().querySelector("#modal-image");
     modalImage.src = originalImageSrc;
+
     instance.show();
-    //debugger;
+
+    //zamknięcie przy ESC
+    const closeOnEscape = (event) => {
+      console.log("Słucham klawiatury!!!");
+      if (event.key === "Escape") {
+        instance.close();
+        document.removeEventListener("keydown", closeOnEscape);
+      }
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
   }
 });
