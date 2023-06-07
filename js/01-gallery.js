@@ -21,13 +21,12 @@ galleryElement.addEventListener("click", (event) => {
   const target = event.target;
   if (target.tagName === "IMG") {
     const instance = basicLightbox.create(`
-  <div class="modal">
-    <img id="modal-image" src="" alt="Modal Image" />
-  </div>
-`);
+      <img id="modal-image" src="" alt="Modal Image" />
+  `);
     const originalImageSrc = target.parentNode.getAttribute("href");
     const modalImage = instance.element().querySelector("#modal-image");
     modalImage.src = originalImageSrc;
     instance.show();
+    //debugger;
   }
 });
