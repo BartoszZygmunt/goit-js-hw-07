@@ -22,9 +22,17 @@ galleryElement.addEventListener("click", (event) => {
   const target = event.target;
 
   if (target.tagName === "IMG") {
-    const instance = basicLightbox.create(`
+    const instance = basicLightbox.create(
+      `
       <img id="modal-image" src="" alt="Modal Image" />
-  `);
+  `,
+      {
+        onClose: () => {
+          document.removeEventListener("keydown", closeOnEscape);
+          console.log("Już nie słucham...");
+        },
+      }
+    );
     const originalImageSrc = target.parentNode.getAttribute("href");
     const modalImage = instance.element().querySelector("#modal-image");
     modalImage.src = originalImageSrc;
@@ -36,7 +44,6 @@ galleryElement.addEventListener("click", (event) => {
       console.log("Słucham klawiatury!!!");
       if (event.key === "Escape") {
         instance.close();
-        document.removeEventListener("keydown", closeOnEscape);
       }
     };
 
