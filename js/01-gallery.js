@@ -2,8 +2,6 @@ import { galleryItems } from "./gallery-items.js";
 //import * as basicLightbox from "basiclightbox";
 
 const galleryElement = document.querySelector(".gallery");
-const modalElement = document.querySelector(".modal");
-const modalImageElement = document.getElementById("modal-image");
 
 const galleryItemsMarkup = galleryItems.map((item) => {
   return `
@@ -17,23 +15,17 @@ const galleryItemsMarkup = galleryItems.map((item) => {
 
 galleryElement.innerHTML = galleryItemsMarkup.join("");
 
-galleryElement.addEventListener("click", (event) => {
-  event.preventDefault();
-  const target = event.target;
-  nmp;
-  if (target.tagName === "IMG") {
-    const originalImageSrc = target.parentNode.href;
-    modalImageElement.src = originalImageSrc;
-    instance.show();
-  }
-});
-
-modalElement.addEventListener("click", () => {
-  modalElement.style.display = "none";
-});
-
 const instance = basicLightbox.create(`
   <div class="modal">
     <img id="modal-image" src="" alt="Modal Image" />
   </div>
 `);
+
+galleryElement.addEventListener("click", (event) => {
+  event.preventDefault();
+  const target = event.target;
+  if (target.tagName === "IMG") {
+    const originalImageSrc = target.parentNode.getAttribute("href");
+    instance.show();
+  }
+});
