@@ -29,7 +29,6 @@ galleryElement.addEventListener("click", (event) => {
       {
         onClose: () => {
           document.removeEventListener("keydown", closeOnEscape);
-          console.log("Już nie słucham...");
         },
       }
     );
@@ -41,7 +40,6 @@ galleryElement.addEventListener("click", (event) => {
 
     //zamknięcie przy ESC
     const closeOnEscape = (event) => {
-      console.log("Słucham klawiatury!!!");
       if (event.key === "Escape") {
         instance.close();
       }

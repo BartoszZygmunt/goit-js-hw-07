@@ -15,7 +15,8 @@ const galleryItemsMarkup = galleryItems.map((item) => {
 });
 
 //dodaję do DOM
-galleryElement.innerHTML = galleryItemsMarkup.join("");
+// galleryElement.innerHTML = galleryItemsMarkup.join("");
+galleryElement.insertAdjacentHTML("beforeend", galleryItemsMarkup.join(""));
 
 //inicjuję galerię
 let lightbox = new SimpleLightbox(".gallery a", {
